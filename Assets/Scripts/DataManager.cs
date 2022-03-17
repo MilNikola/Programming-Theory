@@ -6,7 +6,12 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     public string BestScoreUsername;
-    public string username;
+    private string usernameFinal;
+    public string username {
+        get { return usernameFinal; }
+        set { if (string.IsNullOrEmpty(value)) {
+                usernameFinal = "No Name";
+            } else { usernameFinal = value; } } }
     public static DataManager Instance;
     public int BestScore;
     private void Awake()
@@ -21,14 +26,6 @@ public class DataManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    [System.Serializable]
-    class SaveData
-    {
-        public string BestScoreUsername;
-        public int BestScore;
-    }
-
     public bool isThereSavedData()
     {
         return File.Exists(Application.persistentDataPath + "/savefile.json");
@@ -61,6 +58,12 @@ public class DataManager : MonoBehaviour
         {
             File.Delete(Application.persistentDataPath + "/savefile.json");
         }
+    }
+    [System.Serializable]
+    class SaveData
+    {
+        public string BestScoreUsername;
+        public int BestScore;
     }
 
 }

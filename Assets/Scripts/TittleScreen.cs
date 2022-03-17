@@ -18,7 +18,7 @@ public class TittleScreen : MonoBehaviour
             bestScore.text = DataManager.Instance.BestScoreUsername + ": " + DataManager.Instance.BestScore;
         }
     }
-    private void ResetLeaderboard()
+    public void ResetLeaderboard()
     {
         DataManager.Instance.DeleteData();
             bestScore.text = "Best Score: 0";
